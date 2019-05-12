@@ -6,9 +6,5 @@ public class Main {
         System.out.print("am here now");
     }
 
-    static class GUI {
-        //The Gui class... obviously
-        //I'm using javaFx... y'all okay with that?
-    }
 }
 
