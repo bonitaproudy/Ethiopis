@@ -1,0 +1,29 @@
+.mostOfArea{
+    -fx-background-color: rgba(0,241,255,0.6);
+}
+.footer{
+    -fx-background-color: #22ff1a;
+}
+.bigButton{
+    -fx-background-color: #fff400;
+    -fx-background-radius: 25%;
+    -fx-border-color: transparent;
+    -fx-padding: 10%;
+}
+.menuettes{
+    -fx-text-align:center;
+    -fx-text-decoration:none;
+    -fx-text-transform:uppercase;
+    -fx-border:1.5px solid #aaa;
+    -fx-border-radius:30px;
+    -fx-background-color: rgb(255, 244, 0);
+    -fx-overflow:hidden;
+}
+#externalsettings{
+    -fx-background-image: url("resources/icons8-settings-512.png");
+    -fx-background-size: cover;
+}
+#externalmute{
+    -fx-background-image: url("resources/icons8-no-audio-96.png");
+    -fx-background-size: contain;
+}
