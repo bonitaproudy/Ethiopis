@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TheCloudsController">
+   <children>
+      <ImageView fx:id="motionCloud1" fitHeight="118.0" fitWidth="200.0" layoutX="14.0" layoutY="52.0">
+         <image>
+            <Image url="@../resources/clouds-png-13383(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="motionCloud2" fitHeight="127.0" fitWidth="283.0" layoutX="100.0" layoutY="155.0" translateY="14.0">
+         <image>
+            <Image url="@../resources/clouds-png-13383(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="motionCloud3" fitHeight="145.0" fitWidth="253.0" layoutX="260.0" layoutY="82.0">
+         <image>
+            <Image url="@../resources/clouds-png-13383(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="motionCloud4" fitHeight="145.0" fitWidth="221.0" layoutX="379.0" layoutY="25.0">
+         <image>
+            <Image url="@../resources/clouds-png-13383(1).png" />
+         </image>
+      </ImageView>
+      <Button fx:id="anyKey" layoutX="125.0" layoutY="169.0" mnemonicParsing="false"  prefHeight="62.0" prefWidth="351.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css" text="Press any Key...">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

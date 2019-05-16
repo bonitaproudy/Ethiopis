@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-
+    
+    //todo: add night mode
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("theClouds.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }

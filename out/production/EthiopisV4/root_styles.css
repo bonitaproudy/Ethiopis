@@ -21,7 +21,45 @@
 }
 #externalsettings{
     -fx-background-image: url("resources/icons8-settings-512.png");
+    -fx-background-size: cover;
 }
 #externalmute{
     -fx-background-image: url("resources/icons8-no-audio-96.png");
+    -fx-background-size: contain;
+}
+.defaultLabelFont{
+    -fx-text-fill:#000 ;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-style: Bold;
+
+}
+#diffEasyButton{
+    -fx-background-image: url("resources/icons8-bronze-medal-96.png");
+    -fx-background-size: cover;
+}
+#diffMediumButton{
+    -fx-background-image: url("resources/icons8-silver-medal-96.png");
+    -fx-background-size: cover;
+}
+#diffHardButton{
+    -fx-background-image: url("resources/icons8-gold-medal-96.png");
+    -fx-background-size: cover;
+}
+.emptyBackedButtons{
+    -fx-text-align:center;
+    -fx-text-decoration:none;
+    -fx-text-transform:uppercase;
+    -fx-border:1.5px solid #aaa;
+    -fx-border-radius:30px;
+    -fx-background-color: transparent;
+    -fx-overflow:hidden;
+}
+#backToMe{
+    -fx-background-image: url("resources/icons8-undo-100(1).png");
+    -fx-background-size: cover;
+}
+.starrySky{
+    -fx-background-image: url("resources/rotated.jpg");
+    -fx-background-size: contain;
+
 }

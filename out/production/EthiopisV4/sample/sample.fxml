@@ -11,105 +11,76 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <bottom>
       <HBox prefHeight="54.0" prefWidth="600.0" spacing="12.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="externalsettings" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="Button">
-               <font>
-                  <Font name="Comic Sans MS" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="Button" />
-         </children>
          <padding>
             <Insets left="10.0" top="6.0" />
-         </padding></HBox>
+         </padding>
+         <Button fx:id="externalsettings" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+            <font>
+               <Font name="Comic Sans MS" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" />
+         <Button fx:id="mainexit" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="Exit" />
+      </HBox>
    </bottom>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <bottom>
             <AnchorPane prefHeight="130.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="tree" layoutX="362.0" layoutY="9.0" translateY="15.0">
-                     <image>
-                        <Image url="@../resources/tree-icon-1534.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="birds" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="-38.0">
-                     <image>
-                        <Image url="@../resources/birds-png-3497.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="playbutton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="89.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="Let's Play!" wrapText="true">
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="WHITE" height="23.97" offsetY="1.0" radius="9.26" spread="0.18" width="15.07" />
-                     </effect>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font name="Comic Sans MS Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="264.0" layoutY="106.0" preserveRatio="true" translateY="10.0">
-                     <image>
-                        <Image url="@../resources/icons8-grass-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="278.0" layoutY="108.0" preserveRatio="true" translateY="8.0">
-                     <image>
-                        <Image url="@../resources/icons8-grass-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="321.0" layoutY="106.0" preserveRatio="true" translateY="10.0">
-                     <image>
-                        <Image url="@../resources/icons8-grass-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="307.0" layoutY="104.0" preserveRatio="true" translateY="12.0">
-                     <image>
-                        <Image url="@../resources/icons8-grass-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="62.0" fitWidth="101.0" layoutX="216.0" layoutY="74.0" preserveRatio="true" translateY="20.0">
-                     <image>
-                        <Image url="@../resources/icons8-sheep-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="500.0" layoutY="113.0" preserveRatio="true" translateY="12.0">
-                     <image>
-                        <Image url="@../resources/icons8-grass-96.png" />
-                     </image>
-                  </ImageView>
-               </children>
+               <ImageView fx:id="tree" layoutX="362.0" layoutY="9.0" translateY="15.0">
+                  <Image url="@../resources/tree-icon-1534.png" />
+               </ImageView>
+               <ImageView fx:id="birds" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="-38.0">
+                  <Image url="@../resources/birds-png-3497.png" />
+               </ImageView>
+               <Button fx:id="playbutton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="47.0" prefWidth="89.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="Let's Play!" wrapText="true">
+                  <effect>
+                     <DropShadow blurType="GAUSSIAN" color="WHITE" height="23.97" offsetY="1.0" radius="9.26" spread="0.18" width="15.07" />
+                  </effect>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font name="Comic Sans MS Bold" size="12.0" />
+                  </font>
+               </Button>
+               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="264.0" layoutY="106.0" preserveRatio="true" translateY="10.0">
+                  <Image url="@../resources/icons8-grass-96.png" />
+               </ImageView>
+               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="278.0" layoutY="108.0" preserveRatio="true" translateY="8.0">
+                  <Image url="@../resources/icons8-grass-96.png" />
+               </ImageView>
+               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="321.0" layoutY="106.0" preserveRatio="true" translateY="10.0">
+                  <Image url="@../resources/icons8-grass-96.png" />
+               </ImageView>
+               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="307.0" layoutY="104.0" preserveRatio="true" translateY="12.0">
+                  <Image url="@../resources/icons8-grass-96.png" />
+               </ImageView>
+               <ImageView fx:id="sheep" fitHeight="62.0" fitWidth="101.0" layoutX="216.0" layoutY="74.0" preserveRatio="true" translateY="20.0">
+                  <Image url="@../resources/icons8-sheep-96.png" />
+               </ImageView>
+               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="500.0" layoutY="113.0" preserveRatio="true" translateY="12.0">
+                  <Image url="@../resources/icons8-grass-96.png" />
+               </ImageView>
             </AnchorPane>
          </bottom>
          <center>
             <AnchorPane prefHeight="160.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="sunshine" fitHeight="200.0" fitWidth="198.0" layoutX="176.0">
-                     <image>
-                        <Image url="@../resources/sunshine-icon-32866.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud1" fitHeight="118.0" fitWidth="200.0" layoutX="25.0" layoutY="21.0">
-                     <image>
-                        <Image url="@../resources/clouds-png-13383(1).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud2" fitHeight="118.0" fitWidth="200.0" layoutX="396.0">
-                     <image>
-                        <Image url="@../resources/clouds-png-13383(1).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud3" fitHeight="118.0" fitWidth="200.0" layoutX="327.0" layoutY="90.0">
-                     <image>
-                        <Image url="@../resources/clouds-png-13383(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
+               <ImageView fx:id="sunshine" fitHeight="200.0" fitWidth="198.0" layoutX="176.0">
+                  <Image url="@../resources/sunshine-icon-32866.png" />
+               </ImageView>
+               <ImageView fx:id="cloud1" fitHeight="118.0" fitWidth="200.0" layoutX="25.0" layoutY="21.0">
+                  <Image url="@../resources/clouds-png-13383(1).png" />
+               </ImageView>
+               <ImageView fx:id="cloud2" fitHeight="118.0" fitWidth="200.0" layoutX="396.0">
+                  <Image url="@../resources/clouds-png-13383(1).png" />
+               </ImageView>
+               <ImageView fx:id="cloud3" fitHeight="118.0" fitWidth="200.0" layoutX="327.0" layoutY="90.0">
+                  <Image url="@../resources/clouds-png-13383(1).png" />
+               </ImageView>
             </AnchorPane>
          </center>
       </BorderPane>
