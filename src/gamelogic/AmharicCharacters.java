@@ -74,4 +74,10 @@ public class AmharicCharacters {
     public static List<Character> getListOfAllMembersOfFamily(Character familyName) {
         return subListFamilies(getCharacterFamilyFirstCharacterPosition(familyName)/7, (getCharacterFamilyFirstCharacterPosition(familyName)/7) +1);
     }
+
+    public static String getStringFromCharacterIndicies(int ...indices) {
+        String returnable = "";
+        for (int index : indices) returnable =  returnable.concat(amCharacters[index].toString());
+        return returnable;
+    }
 }
