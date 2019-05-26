@@ -1,6 +1,7 @@
 package gamelogic;
 
 import java.util.*;
+import static gamelogic.Levels.*;
 
 public class ImageQuizGameItem {
 
@@ -82,13 +83,13 @@ public class ImageQuizGameItem {
 
     private int getNumberOfAnswersToHide(int level , int answerSize) {
         switch (level) {
-            case ImageQuizGame.LEVEL_EASY:
+            case LEVEL_EASY:
                 //only 1 answer should be hidden on easy level
                 return 1;
-            case ImageQuizGame.LEVEL_MID:
+            case LEVEL_MID:
                 //50% of the answer should be hidden on medium level
                 return (int) Math.round(answerSize * 0.5);
-            case ImageQuizGame.LEVEL_HARD:
+            case LEVEL_HARD:
                 //all the answers should be hidden on hard level
                 return answerSize;
             default:
@@ -121,10 +122,11 @@ public class ImageQuizGameItem {
         return returnable;
     }
 
-    private <T> boolean checkIfGeneratedListIsNotValid(ArrayList<T> items, int ofSize) {
+    @SuppressWarnings("unchecked")
+    private boolean checkIfGeneratedListIsNotValid(ArrayList items, int ofSize) {
         //remove any duplicates and check the size if it matches the requested size
         ArrayList<Integer> possibleDuplicates = new ArrayList<>();
-        ArrayList<T> nonDuplicatedItems = new ArrayList();
+        ArrayList nonDuplicatedItems = new ArrayList();
 
         for (int i = 0; i < items.size(); i++)
             for (int j = i+1; j < items.size(); j++)
@@ -146,6 +148,5 @@ public class ImageQuizGameItem {
                 + "] , [" + imagebase64
                 + "] , [" + Arrays.toString(positionToHide.toArray(new Integer[0]))
                 + "] , [" + gameLevel + "]";
-
     }
 }

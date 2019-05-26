@@ -1,5 +1,4 @@
-import gamelogic.ImageQuizGame;
-import gamelogic.ImageQuizGameItem;
+import static gamelogic.AmharicCharacters.getCharacterFamily;
 
 public class Main {
 
@@ -10,23 +9,38 @@ public class Main {
     }
 
     public static void main(String args[]){
+//        runFor(() -> {
+//            ImageQuizGameItem aGame = new ImageQuizGame(LEVEL_EASY).giveMeAQuestion();
+//            System.out.println(aGame.toString());
+//        }, 10);
+//
+//        System.out.println(" ----------------------------------------------------------------------------------------------------------- ");
+//
+//        runFor(() -> {
+//            ImageQuizGameItem aGame = new ImageQuizGame(LEVEL_MID).giveMeAQuestion();
+//            System.out.println(aGame.toString());
+//        }, 10);
+//
+//        System.out.println(" ----------------------------------------------------------------------------------------------------------- ");
+//
+//        runFor(() -> {
+//            ImageQuizGameItem aGame = new ImageQuizGame(LEVEL_HARD).giveMeAQuestion();
+//            System.out.println(aGame.toString());
+//        }, 10);
+
         runFor(() -> {
-            ImageQuizGameItem aGame = new ImageQuizGame(ImageQuizGame.LEVEL_EASY).giveMeAQuestion();
-            System.out.println(aGame.toString());
+            System.out.println("Family: " + getCharacterFamily('ቩ'));
         }, 10);
 
-        System.out.println(" ----------------------------------------------------------------------------------------------------------- ");
+//        runFor(() -> {
+//            System.out.println("Game: " + new MatchCharacterFamilyGame(LEVEL_EASY).getASingleGame(8));
+//            System.out.println("match: " + (amCharacters.length/7) *7);
+//        }, 10);
+//
+//        runFor(() -> {
+//            System.out.println("Game: " + new RearrangeCharacterGame(LEVEL_HARD).getASingleGame(8));
+////            System.out.println("match: " + (amCharacters.length/7) *7);
+//        }, 10);
 
-        runFor(() -> {
-            ImageQuizGameItem aGame = new ImageQuizGame(ImageQuizGame.LEVEL_MID).giveMeAQuestion();
-            System.out.println(aGame.toString());
-        }, 10);
-
-        System.out.println(" ----------------------------------------------------------------------------------------------------------- ");
-
-        runFor(() -> {
-            ImageQuizGameItem aGame = new ImageQuizGame(ImageQuizGame.LEVEL_HARD).giveMeAQuestion();
-            System.out.println(aGame.toString());
-        }, 10);
     }
 } 

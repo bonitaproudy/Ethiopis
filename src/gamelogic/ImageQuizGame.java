@@ -2,14 +2,11 @@ package gamelogic;
 
 import java.util.ArrayList;
 import java.util.Random;
+import static gamelogic.Levels.*;
 
 import static java.util.Arrays.asList;
 
 public class ImageQuizGame {
-
-    public static final int LEVEL_EASY = 1;
-    public static final int LEVEL_MID = 2;
-    public static final int LEVEL_HARD = 3;
 
     private int level;
 
