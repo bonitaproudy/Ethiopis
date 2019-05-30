@@ -9,11 +9,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox prefHeight="54.0" prefWidth="600.0" spacing="12.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
+      <HBox fx:id="grassClassSample" prefHeight="54.0" prefWidth="600.0" spacing="12.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <padding>
             <Insets left="10.0" top="6.0" />
          </padding>
@@ -21,13 +22,30 @@
             <font>
                <Font name="Comic Sans MS" size="12.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
-         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" />
-         <Button fx:id="mainexit" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="Exit" />
+         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
+         <Button fx:id="mainexit" accessibleHelp="Press again to exit" accessibleText="Press again to exit" cancelButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ውጣ">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font></Button>
+         <Region prefHeight="48.0" prefWidth="318.0" HBox.hgrow="NEVER" />
+         <Button fx:id="nightMode" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
       </HBox>
    </bottom>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="skyClassSample" prefHeight="200.0" prefWidth="200.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <bottom>
             <AnchorPane prefHeight="130.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <ImageView fx:id="tree" layoutX="362.0" layoutY="9.0" translateY="15.0">
@@ -36,7 +54,7 @@
                <ImageView fx:id="birds" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="-38.0">
                   <Image url="@../resources/birds-png-3497.png" />
                </ImageView>
-               <Button fx:id="playbutton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="47.0" prefWidth="89.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="Let's Play!" wrapText="true">
+               <Button fx:id="playbutton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="እንጫወት!" wrapText="true">
                   <effect>
                      <DropShadow blurType="GAUSSIAN" color="WHITE" height="23.97" offsetY="1.0" radius="9.26" spread="0.18" width="15.07" />
                   </effect>
@@ -69,8 +87,7 @@
          </bottom>
          <center>
             <AnchorPane prefHeight="160.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <ImageView fx:id="sunshine" fitHeight="200.0" fitWidth="198.0" layoutX="176.0">
-                  <Image url="@../resources/sunshine-icon-32866.png" />
+               <ImageView fx:id="sunshine" fitHeight="200.0" fitWidth="198.0" layoutX="151.0" layoutY="4.0">
                </ImageView>
                <ImageView fx:id="cloud1" fitHeight="118.0" fitWidth="200.0" layoutX="25.0" layoutY="21.0">
                   <Image url="@../resources/clouds-png-13383(1).png" />

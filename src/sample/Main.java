@@ -4,21 +4,31 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-    
-    //todo: add night mode
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        Parent root = FXMLLoader.load(getClass().getResource("theClouds.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("splash.fxml"));
+        SplashController controller = new SplashController();
+        loader.setController(controller);
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 600, 400);
+        scene.setFill(Color.TRANSPARENT);
+        Rectangle rect = new Rectangle(600,400);
+        rect.setArcHeight(0.7);
+        rect.setArcWidth(1);
+//        primaryStage.s("-fx-background-image: url('../resources/clouds.png')");
+        root.setClip(rect);
+        controller.setPrimaryStage(primaryStage);
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
     }
 
 

@@ -3,15 +3,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="splashPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="starrySky" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SplashController">
+<BorderPane fx:id="splashPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 25%; -fx-border-radius: 25%;" styleClass="starrySky" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-       <ImageView fx:id="theEarth" fitHeight="315.0" fitWidth="308.0" preserveRatio="true" translateY="50.0" BorderPane.alignment="CENTER">
+       <ImageView fx:id="theEarth" fitHeight="315.0" fitWidth="308.0" preserveRatio="true" BorderPane.alignment="CENTER">
            <Image url="@../resources/earth-png-25605.png" />
        </ImageView>
    </center>
    <bottom>
+   </bottom>
+   <bottom>
+      <AnchorPane prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="justForCodeButton" defaultButton="true" layoutX="256.0" layoutY="2.0" mnemonicParsing="false" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css" />
+         </children>
+      </AnchorPane>
    </bottom>
 </BorderPane>

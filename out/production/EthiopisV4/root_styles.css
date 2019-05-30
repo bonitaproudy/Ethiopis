@@ -1,3 +1,16 @@
+
+.mainFxmlClass #splashPane{
+    -fx-background-size: 1200 900;
+    -fx-background-radius: 0 0 18 18;
+    -fx-border-radius: 0 0 18 18;
+    -fx-background-color: #FC3D44;
+}
+#settingsPane{
+
+}
+.splashPane{
+    -fx-background-radius: 30px;
+}
 .mostOfArea{
     -fx-background-color: rgba(0,241,255,0.6);
 }
@@ -9,28 +22,41 @@
     -fx-background-radius: 25%;
     -fx-border-color: transparent;
     -fx-padding: 10%;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
+    -fx-font-style: Bold;
 }
 .menuettes{
     -fx-text-align:center;
-    -fx-text-decoration:none;
-    -fx-text-transform:uppercase;
+    -fx-text-decoration:bold;
     -fx-border:1.5px solid #aaa;
     -fx-border-radius:30px;
     -fx-background-color: rgb(255, 244, 0);
     -fx-overflow:hidden;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
+    -fx-font-style: Bold;
+}
+#answerTextField{
+    -fx-font-family: Nyala;
+    -fx-font-size: 20;
+    -fx-background-color: transparent;
 }
 #externalsettings{
     -fx-background-image: url("resources/icons8-settings-512.png");
     -fx-background-size: cover;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
 }
 #externalmute{
-    -fx-background-image: url("resources/icons8-no-audio-96.png");
+    /*-fx-background-image: url("resources/icons8-no-audio-96.png");*/
     -fx-background-size: contain;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
 }
 .defaultLabelFont{
-    -fx-text-fill:#000 ;
-    -fx-font-family: "Comic Sans MS";
-    -fx-font-style: Bold;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
 
 }
 #diffEasyButton{
@@ -53,6 +79,8 @@
     -fx-border-radius:30px;
     -fx-background-color: transparent;
     -fx-overflow:hidden;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
 }
 #backToMe{
     -fx-background-image: url("resources/icons8-undo-100(1).png");
@@ -61,5 +89,88 @@
 .starrySky{
     -fx-background-image: url("resources/rotated.jpg");
     -fx-background-size: contain;
+    -fx-border-radius: 25%;
 
+}
+.imageQuizAnswers{
+    -fx-text-align:center;
+    -fx-text-decoration:none;
+    -fx-text-transform:uppercase;
+    -fx-border:1.5px solid #aaa;
+    -fx-border-radius:30px;
+    -fx-background-color: transparent;
+    -fx-overflow:hidden;
+    -fx-pref-height:80px;
+    -fx-pref-width: 145px;
+    -fx-padding: 2px,5px;
+    -fx-font-family: "Nyala";
+    -fx-font-size: 20;
+}
+#internalHome{
+    -fx-background-image: url("resources/home_48px.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-opacity: 0.85;
+}
+#internalPause{
+    -fx-background-image: url("resources/pause-toggle.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+#internalSkip{
+    -fx-background-image: url("resources/end_48px.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+#anyKey{
+    -fx-font-size: 35;
+}
+#externalmute{
+    -fx-font-size: 0;
+}
+#mainexit{
+    -fx-font-size: 20 ;
+}
+.buttonAnimation{
+
+}
+.mostOfAreaNight{
+    -fx-background-color: rgba(37,36,122,1);
+}
+.footerNight{
+    -fx-background-color: rgba(15,84,16,0.9);
+}
+.menuettesNight{
+    -fx-text-align:center;
+    -fx-text-decoration:none;
+    -fx-text-transform:uppercase;
+    -fx-border:1.5px solid #aaa;
+    -fx-border-radius:30px;
+    -fx-background-color: rgba(200, 200, 200,0.8);
+    -fx-overflow:hidden;
+}
+.bigButtonNight{
+    -fx-background-color: rgba(200, 200, 200,0.8);
+    -fx-background-radius: 25%;
+    -fx-border-color: transparent;
+    -fx-padding: 10%;
+}
+#nightMode{
+    -fx-background-image: url("resources/Color-picker.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+.bigButton :hover{
+    -fx-pref-width: 92  ;
+    -fx-pref-height: 52  ;
+    -fx-font-style: bold;
+}
+.menuettes :hover{
+    -fx-font-style: bold;
+}
+.outerPane{
+    -fx-border-radius: 25%;
+}
+.rootPane{
+    -fx-border-radius: 25%;
 }

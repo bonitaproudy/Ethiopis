@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -9,69 +10,81 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChoicesMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox prefHeight="54.0" prefWidth="600.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER" />
+      <HBox fx:id="grassClassChoices" prefHeight="54.0" prefWidth="600.0" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <BorderPane prefHeight="350.0" prefWidth="273.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
-         <center>
-            <AnchorPane prefHeight="250.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="46.0">
+      <BorderPane fx:id="skyClassChoices" prefHeight="350.0" prefWidth="273.0" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
+         <top>
+            <AnchorPane prefHeight="279.0" prefWidth="577.0" BorderPane.alignment="CENTER">
+               <ImageView fx:id="topCloud" blendMode="SRC_ATOP" fitHeight="118.0" fitWidth="200.0" layoutX="46.0" pickOnBounds="true">
                   <Image url="@../resources/clouds-png-13383(1).png" />
                </ImageView>
-               <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="-23.0" layoutY="90.0">
+               <ImageView fx:id="bottomCloud" fitHeight="118.0" fitWidth="200.0" layoutX="-23.0" layoutY="90.0">
                   <Image url="@../resources/clouds-png-13383(1).png" />
                </ImageView>
-               <Button fx:id="backToMe" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackToMeClick" prefHeight="34.0" prefWidth="34.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css" />
+               <Button fx:id="backToMe" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor></Button>
+               <AnchorPane layoutX="253.0" layoutY="18.0" prefHeight="316.0" prefWidth="300.0" translateY="16.0">
+                  <children>
+                     <ImageView fitHeight="234.0" fitWidth="234.0" layoutX="50.0" layoutY="84.0" translateY="50.0">
+                        <image>
+                           <Image url="@../resources/icons8-sports-podium-96.png" />
+                        </image>
+                     </ImageView>
+                     <Button fx:id="diffMediumButton" layoutX="50.0" layoutY="113.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                     <Button fx:id="diffHardButton" layoutX="132.0" layoutY="78.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                     <Button fx:id="diffEasyButton" layoutX="211.0" layoutY="141.0" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor></Button>
+                     <Label fx:id="difficultyLabelMedium" layoutX="62.0" layoutY="188.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="መካከለኛ" />
+                     <Label fx:id="difficultyLabelHard" layoutX="149.0" layoutY="159.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="ከባድ" />
+                     <Label fx:id="difficultyLabelEasy" layoutX="233.0" layoutY="216.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="ቀላል" />
+                     <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="62.0" layoutY="284.0" preserveRatio="true" translateY="10.0">
+                        <image>
+                           <Image url="@../resources/icons8-grass-96.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fitHeight="70.0" fitWidth="29.0" layoutY="284.0" preserveRatio="true" translateY="10.0">
+                        <image>
+                           <Image url="@../resources/icons8-grass-96.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="22.0" layoutY="284.0" preserveRatio="true" translateY="8.0">
+                        <image>
+                           <Image url="@../resources/icons8-grass-96.png" />
+                        </image>
+                     </ImageView>
+                     <Label fx:id="difficultyLabelSelect" layoutX="104.0" layoutY="14.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="ክብደቱን ምረጡ">
+                        <font>
+                           <Font size="25.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="14.0" layoutY="191.0" prefHeight="143.0" prefWidth="288.0" translateY="22.0">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="-38.0">
+                     <Image url="@../resources/birds-png-3497.png" />
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="156.0" layoutY="103.0" preserveRatio="true" translateY="12.0">
+                     <Image url="@../resources/icons8-grass-96.png" />
+                  </ImageView>
+                  <ImageView layoutY="15.0">
+                     <Image url="@../resources/tree-icon-1534.png" />
+                  </ImageView>
+               </AnchorPane>
             </AnchorPane>
-         </center>
-         <bottom>
-            <AnchorPane prefHeight="126.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="-38.0">
-                  <Image url="@../resources/birds-png-3497.png" />
-               </ImageView>
-               <ImageView layoutX="12.0" layoutY="9.0" translateY="15.0">
-                  <Image url="@../resources/tree-icon-1534.png" />
-               </ImageView>
-               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="150.0" layoutY="113.0" preserveRatio="true" translateY="12.0">
-                  <Image url="@../resources/icons8-grass-96.png" />
-               </ImageView>
-            </AnchorPane>
-         </bottom>
+         </top>
       </BorderPane>
    </center>
-   <right>
-      <BorderPane prefHeight="337.0" prefWidth="334.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
-         <top>
-            <Label styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="Select Difficulty" translateY="25.0" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </top>
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="472.0" BorderPane.alignment="CENTER">
-               <ImageView fitHeight="234.0" fitWidth="352.0" layoutX="50.0" layoutY="79.0" preserveRatio="true" translateY="50.0">
-                  <Image url="@../resources/icons8-sports-podium-96.png" />
-               </ImageView>
-               <Button fx:id="diffMediumButton" layoutX="50.0" layoutY="113.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" />
-               <Button fx:id="diffHardButton" layoutX="132.0" layoutY="78.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" />
-               <Button fx:id="diffEasyButton" layoutX="211.0" layoutY="141.0" prefHeight="70.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" />
-               <Label layoutX="62.0" layoutY="188.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="Medium" />
-               <Label layoutX="153.0" layoutY="160.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="Hard" />
-               <Label layoutX="233.0" layoutY="216.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="Easy" />
-               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="62.0" layoutY="284.0" preserveRatio="true" translateY="10.0">
-                  <Image url="@../resources/icons8-grass-96.png" />
-               </ImageView>
-               <ImageView fitHeight="70.0" fitWidth="29.0" layoutY="284.0" preserveRatio="true" translateY="10.0">
-                  <Image url="@../resources/icons8-grass-96.png" />
-               </ImageView>
-               <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="22.0" layoutY="284.0" preserveRatio="true" translateY="8.0">
-                  <Image url="@../resources/icons8-grass-96.png" />
-               </ImageView>
-            </AnchorPane>
-         </center>
-      </BorderPane>
-   </right>
 </BorderPane>

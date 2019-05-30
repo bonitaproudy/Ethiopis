@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TheCloudsController">
+<AnchorPane fx:id="splashPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="motionCloud1" fitHeight="118.0" fitWidth="200.0" layoutX="14.0" layoutY="52.0">
          <image>
@@ -29,9 +28,9 @@
             <Image url="@../resources/clouds-png-13383(1).png" />
          </image>
       </ImageView>
-      <Button fx:id="anyKey" layoutX="125.0" layoutY="169.0" mnemonicParsing="false"  prefHeight="62.0" prefWidth="351.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css" text="Press any Key...">
+      <Button fx:id="anyKey" defaultButton="true" layoutX="181.0" layoutY="139.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="238.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css" text="ኢትዮጲስ">
          <font>
-            <Font name="Comic Sans MS" size="30.0" />
+            <Font name="Comic Sans MS" size="36.0" />
          </font>
       </Button>
    </children>

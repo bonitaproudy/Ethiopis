@@ -13,6 +13,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
@@ -22,16 +23,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashController implements Initializable {
+    private Stage primaryStage;
     //Universal Declarations
     Timer loopTheEarth = new Timer();
 
-
+    public Button justForCodeButton;
     public BorderPane splashPane;
     public ImageView theEarth;
-    public Button pressKey;
 
-    public Button getPressKey() {
-        return pressKey;
+    public Button getJustForCodeButton() {
+        return justForCodeButton;
     }
 
     public BorderPane getSplashPane() {
@@ -42,37 +43,57 @@ public class SplashController implements Initializable {
         return theEarth;
     }
 
-//    public  void toTheClouds() throws IOException{
-//        Parent toCloudsPage =  FXMLLoader.load(getClass().getResource("theClouds.fxml"));
-//        Scene theClouds = new Scene(toCloudsPage);
-//        Stage theCloudsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        theCloudsStage.setScene(theClouds);
-//        theCloudseStage.show();
-//    }
+
     public void animations() {
         loopTheEarth.schedule(new TimerTask() {
             @Override
+            public boolean cancel() {
+                Platform.runLater(() -> {
+                    try {
+                        clickedToNextPage();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                return super.cancel();
+            }
+
+            @Override
             public void run() {
-                if(theEarth.getFitWidth()>=1200){
-                    getPressKey().setVisible(true);
-                    this.notifyAll();
+                if(theEarth.getFitWidth()>=1000){
                     this.cancel();
                 }
                 Platform.runLater(() -> {
                     theEarth.setFitHeight(theEarth.getFitHeight()+10);
-                    System.out.println(theEarth.getFitHeight());
                     theEarth.setFitWidth(theEarth.getFitWidth()+10);
-                    System.out.println(theEarth.getFitWidth());
                     getSplashPane().setOpacity(getSplashPane().getOpacity()-0.01);
                 });
             }
-        }, 1500, 30);
+        }, 1000, 10);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public void clickedToNextPage() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("theClouds.fxml"));
+        TheCloudsController controller = new TheCloudsController();
+        loader.setController(controller);
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 600, 400);
+        controller.setPrimaryStage(primaryStage);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         animations();
-
-
     }
 }
