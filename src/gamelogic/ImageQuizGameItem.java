@@ -19,7 +19,7 @@ public class ImageQuizGameItem {
         random.setSeed(new Date().getTime());
 
         int numberOfCharactersToHide = getNumberOfAnswersToHide(gameLevel, answerText.size());
-        this.possibleChoices = getListOfRandomAmCharacters(Math.max(4 , numberOfCharactersToHide));
+        this.possibleChoices = getListOfRandomAmCharacters(Math.max(8 , numberOfCharactersToHide));
         this.positionToHide = getListOfPositionsToHide(answerText.size(), numberOfCharactersToHide);
 
         for (int i = 0; i < numberOfCharactersToHide; i++) {
