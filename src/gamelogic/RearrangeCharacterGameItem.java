@@ -2,6 +2,7 @@ package gamelogic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RearrangeCharacterGameItem {
 
@@ -30,6 +31,12 @@ public class RearrangeCharacterGameItem {
             }
         }
         return arranged;
+    }
+
+    public ArrayList<Character> getRandomizedCharacters() {
+        ArrayList<Character> charactersClone = (ArrayList<Character>) arrangedCharacters.clone();
+        Collections.shuffle(charactersClone);
+        return charactersClone;
     }
 
     @Override
