@@ -1,34 +1,34 @@
 package networking;
 
-import com.sun.istack.internal.Nullable;
-
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
 
 import static networking.MultiplayerServer.ETHIOPIS_PORT;
+import static networking.MultiplayerServer.ETHIOPIS_SNIFFER__PORT;
 
 public class NetworkSniffer {
 
     private OnServerFoundCallback mainCallback;
     private CustomThreadPool mainThreadPool;
+    private boolean isHostFound = false;
 
     NetworkSniffer(OnServerFoundCallback mainCallback) {
         this.mainCallback = mainCallback;
     }
 
     public static class ServerItem {
-        Inet4Address address;
+        byte[] address;
         String name;
 
-        ServerItem(Inet4Address address, String name) {
+        ServerItem(byte[] address, String name) {
             this.address = address;
             this.name = name;
         }
 
         @Override
         public String toString() {
-            return "Address: " + address + ", Name: " + name;
+            return "Address: " + Arrays.toString(address) + ", Name: " + name;
         }
     }
 
@@ -58,7 +58,7 @@ public class NetworkSniffer {
 
     private void weFoundAServer(ServerItem item) throws IOException {
         if (mainCallback != null) mainCallback.onServerFound(item);
-        mainThreadPool.shutdownNow();
+        isHostFound = true;
     }
 
     private Inet4Address myCurrentIP() throws IOException {
@@ -72,64 +72,71 @@ public class NetworkSniffer {
         return ip;
     }
 
-    private boolean isIpAServer(byte[] address) throws IOException{
+    private boolean isIpAServer(byte[] address, byte[] myIp) throws IOException{
+
+        if (address[3] == 0 || address[3] == 1 || address[3] == myIp[3]) return false;
+
         Inet4Address inetAddress = (Inet4Address) Inet4Address.getByAddress(address);
         if (inetAddress.isReachable(1000)) {
-            //System.out.println("@Reachable: " + getIpFromBytes(ipNormalizer(address)));
+            System.out.println("@Reachable: " + getIpFromBytes(ipNormalizer(address)));
             try {
-                Socket tester = new Socket(getIpFromBytes(ipNormalizer(address)), ETHIOPIS_PORT);
-                tester.setSoTimeout(1000);
-                if (tester.isConnected()) return true;
-                else {
-                    //System.out.println("Failed to connect to : " + getIpFromBytes(ipNormalizer(address)));
-                    return false;
-                }
+                Socket tester = new Socket((Inet4Address.getByAddress(address)), ETHIOPIS_SNIFFER__PORT);
+                System.out.println("Failed to connect to : " + getIpFromBytes(ipNormalizer(address)));
+                return true;
             } catch (ConnectException x) {
                 x.printStackTrace();
                 return false;
             }
         } else {
-            //System.out.println("!Reachable: " + getIpFromBytes(ipNormalizer(address)));
+           // System.out.println("!Reachable: " + getIpFromBytes(ipNormalizer(address)));
             return false;
         }
     }
 
-    @Nullable
     void findServerInMyNetwork(CustomThreadPool threadPool) throws IOException {
-        if (mainThreadPool == null) mainThreadPool = threadPool;
-        byte[] address = myCurrentIP().getAddress();
+        new Thread(() -> {
+            if (mainThreadPool == null) mainThreadPool = threadPool;
+            byte[] address = new byte[0];
+            try {
+                address = myCurrentIP().getAddress();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        System.out.println("Address: " + Arrays.toString(address));
-        System.out.println("Address Normalized: " + Arrays.toString(ipNormalizer(address)));
+            System.out.println("Address: " + Arrays.toString(address));
+            System.out.println("Address Normalized: " + Arrays.toString(ipNormalizer(address)));
 
-        for (int lastNode = 0; lastNode < 255; lastNode++) {
-            byte[] mutableClone = address.clone();
-            mutableClone[3] = (byte) lastNode;
+            for (int lastNode = 0; lastNode < 255; lastNode++) {
+                byte[] mutableClone = address.clone();
+                mutableClone[3] = (byte) lastNode;
 
-            threadPool.submit(() -> {
-                try {
-                    if (isIpAServer(mutableClone)) {
-                        System.out.println("WE FOUND SERVER @" + getIpFromBytes(
-                                new int[]{mutableClone[0], mutableClone[1], mutableClone[2], mutableClone[3]}
-                        ));
+                byte[] finalAddress = address;
+                threadPool.submit(() -> {
+                    try {
+                        if (isIpAServer(mutableClone, finalAddress)) {
+                            System.out.println("WE FOUND SERVER @" + getIpFromBytes(
+                                    new int[]{mutableClone[0], mutableClone[1], mutableClone[2], mutableClone[3]}
+                            ));
 
-                        weFoundAServer(new ServerItem(
-                                (Inet4Address) Inet4Address.getByAddress(mutableClone),
-                                "NOOBIE"
-                        ));
+                            weFoundAServer(new ServerItem(
+                                    mutableClone,
+                                    "NOOBIE"
+                            ));
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                });
+            }
+
+            while (true) {
+                if (isHostFound) {
+                    mainThreadPool.shutdownNow();
+                    Thread.currentThread().interrupt();
+                    break;
                 }
-            });
-        }
-
-        while (true) {
-            if (mainThreadPool.isThreadPoolEmpty()) break;
-        }
-
-        weFoundAServer(null);
+            }
+        }).start();
     }
-
 
 }

@@ -1,10 +1,11 @@
 package gamelogic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class RearrangeCharacterGameItem {
+public class RearrangeCharacterGameItem implements Serializable {
 
     private ArrayList<Character> arrangedCharacters;
     private int level;

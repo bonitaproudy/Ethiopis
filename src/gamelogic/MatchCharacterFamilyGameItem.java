@@ -1,11 +1,12 @@
 package gamelogic;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class MatchCharacterFamilyGameItem {
+public class MatchCharacterFamilyGameItem implements Serializable {
 
     private Map<Character, Character> gameCharacters;
     private int level;
