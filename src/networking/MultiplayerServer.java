@@ -1,18 +1,15 @@
 package networking;
 
-import gamelogic.MatchCharacterFamilyGame;
-import gamelogic.MatchCharacterFamilyGameItem;
-import gamelogic.RearrangeCharacterGame;
 import gamelogic.RearrangeCharacterGameItem;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Scanner;
-
-import static gamelogic.Levels.LEVEL_EASY;
 
 public class MultiplayerServer {
 
@@ -20,13 +17,14 @@ public class MultiplayerServer {
     private ServerSocket mainSocket;
     private ServerSocket snifferSocket;
     private Thread mainSocketThread;
+    private PrintWriter printWriter;
     private RearrangeCharacterGameItem sharedItem;
     public static final int ETHIOPIS_PORT = 21109;
     public static final int ETHIOPIS_SNIFFER__PORT = 21209;
     private OnGameStarted mainCallback;
 
     public interface OnGameStarted {
-        void startYourEngine(RearrangeCharacterGameItem game);
+        void startYourEngine(RearrangeCharacterGameItem game) throws IOException;
         void tekedemk(Date time);
     }
 
@@ -76,7 +74,15 @@ public class MultiplayerServer {
         }
     }
 
-    public void stopServer() {
+    public void kedem() {
+        if (mainSocket != null && printWriter != null) {
+            printWriter.println("COMMAND:TEKEDEMEK");
+        }
+    }
+
+    public void stopServer() throws IOException {
+        if (mainSocket != null) mainSocket.close();
+        if (printWriter != null) printWriter.close();
         if (mainSocketThread != null) mainSocketThread.interrupt();
     }
 
@@ -88,28 +94,28 @@ public class MultiplayerServer {
         // - - -|__-__-__| Game goes to the client
         // RECEIVED? -> YES
         // TELL ME WHEN TO START -> START
-        // `BOTH PLAY` ====> until they hit the tekedemk rmi method
+        // `BOTH PLAY` ====> until the winner sends the tekedemk command
 
         Scanner scanner = new Scanner(connectedSocket.getInputStream());
-        PrintWriter out = new PrintWriter(connectedSocket.getOutputStream(), true);
+        printWriter = new PrintWriter(connectedSocket.getOutputStream(), true);
 
-        out.println("HI");
+        printWriter.println("HI");
         while (scanner.hasNext()) {
             String i = scanner.nextLine();
             i = i.toUpperCase();    // make everything cap
-            if (i.equals("HI:*")) out.println("COMMAND:" + "SEND_GAME"); //client sent "HI:*"
+            if (i.equals("HI:*")) printWriter.println("COMMAND:" + "SEND_GAME"); //client sent "HI:*"
             else if (i.startsWith("ANSWER:")) {
                 if (i.substring(i.indexOf("ANSWER:") + "ANSWER:".length()).startsWith("SEND_GAME:")) {
                     //client sent "ANSWER:SEND_GAME:YES or ANSWER:SEND_GAME:NO
                     if (i.contains("YES")) {
-                        out.println("COMMAND:" + "ABOUT_TO_SEND_GAME");
+                        printWriter.println("COMMAND:" + "ABOUT_TO_SEND_GAME");
                         outputStream.writeObject(sharedItem);
                     }
-                    else out.println("COMMAND:" + "ABORTED_SENDING_GAME");
+                    else printWriter.println("COMMAND:" + "ABORTED_SENDING_GAME");
                 } else if (i.substring(i.indexOf("ANSWER:") + "ANSWER:".length()).startsWith("RECEIVED:")) {
                     //client sent "ANSWER:RECEIVED:YES or ANSWER:RECEIVED:NO
-                    if (i.contains("YES")) out.println("COMMAND:" + "CALL_TO_START");
-                    else out.println("COMMAND:" + "ABORTED_STARTING_GAME");
+                    if (i.contains("YES")) printWriter.println("COMMAND:" + "CALL_TO_START");
+                    else printWriter.println("COMMAND:" + "ABORTED_STARTING_GAME");
                 }
             }
             else if (i.startsWith("COMMAND:")) {
@@ -125,10 +131,6 @@ public class MultiplayerServer {
             }
         }
 
-
-
      }
-
-
 
 }

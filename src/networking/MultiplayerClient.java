@@ -2,12 +2,15 @@ package networking;
 
 import gamelogic.MatchCharacterFamilyGameItem;
 import gamelogic.RearrangeCharacterGameItem;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 
@@ -20,6 +23,7 @@ public class MultiplayerClient {
     private Socket mainSocket;
     private ArrayList<ServerItem> serverItems = new ArrayList<>();
     private RearrangeCharacterGameItem receivedGameItem;
+    private PrintWriter writer;
     private boolean aboutToReceiveGame = false;
     private boolean gameReceived = false;
     private MultiplayerServer.OnGameStarted mainCallback;
@@ -30,21 +34,30 @@ public class MultiplayerClient {
 
     public void startSniffer() throws IOException {
         NetworkSniffer networkSniffer = new NetworkSniffer(item -> communicateWithAServer(item.address));
-        networkSniffer.findServerInMyNetwork(new CustomThreadPool(400));
+        networkSniffer.findServerInMyNetwork(Executors.newFixedThreadPool(200));
     }
 
     public void communicateWithAServer(byte[] address) throws IOException {
         if (address == null) return;
-        Socket mainSocket = new Socket((Inet4Address.getByAddress(address)), ETHIOPIS_PORT);
+        mainSocket = new Socket((Inet4Address.getByAddress(address)), ETHIOPIS_PORT);
         Scanner scanner = new Scanner(mainSocket.getInputStream());
         ObjectInputStream dataInputStream = new ObjectInputStream(mainSocket.getInputStream());
-        PrintWriter writer  = new PrintWriter(mainSocket.getOutputStream(), true);
+        writer  = new PrintWriter(mainSocket.getOutputStream(), true);
 
         while(scanner.hasNext()) {
             String scannerLine = scanner.nextLine();
             System.out.println(scannerLine);
             figureOutResponseForServer(writer, dataInputStream, scannerLine);
         }
+    }
+
+    public void kedem() {
+        if (mainSocket != null && writer != null) { writer.println("COMMAND:TEKEDEMEK"); }
+//        try {
+//            if (mainSocket != null && writer != null) { mainSocket.close(); writer.close(); }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void figureOutResponseForServer(PrintWriter writer, ObjectInputStream inputStream, String serverCommand) {
@@ -67,8 +80,16 @@ public class MultiplayerClient {
 
             } else if (serverCommand.substring(serverCommand.indexOf("COMMAND:") + "COMMAND:".length()).startsWith("CALL_TO_START")) {
                 //server said "COMMAND:CALL_TO_START"
-                if (mainCallback != null) mainCallback.startYourEngine(receivedGameItem);
+                if (mainCallback != null) {
+                    try {
+                        mainCallback.startYourEngine(receivedGameItem);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 writer.println("COMMAND:START_GAME");
+            } else if (serverCommand.substring(serverCommand.indexOf("COMMAND:") + "COMMAND:".length()).startsWith("TEKEDEMEK")) {
+                if (mainCallback != null) mainCallback.tekedemk(new Date());
             }
         }
     }

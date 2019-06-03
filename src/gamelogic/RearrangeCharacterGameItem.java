@@ -8,11 +8,13 @@ import java.util.Collections;
 public class RearrangeCharacterGameItem implements Serializable {
 
     private ArrayList<Character> arrangedCharacters;
+    private ArrayList<Character> shuffledCharacters;
     private int level;
 
-    public RearrangeCharacterGameItem(ArrayList<Character> arrangedCharacters, int level) {
+    public RearrangeCharacterGameItem(ArrayList<Character> arrangedCharacters, ArrayList<Character> shuffledCharacters, int level) {
         this.arrangedCharacters = arrangedCharacters;
         this.level = level;
+        this.shuffledCharacters = shuffledCharacters;
     }
 
     public int getLevel() {
@@ -34,14 +36,12 @@ public class RearrangeCharacterGameItem implements Serializable {
         return arranged;
     }
 
-    public ArrayList<Character> getRandomizedCharacters() {
-        ArrayList<Character> charactersClone = (ArrayList<Character>) arrangedCharacters.clone();
-        Collections.shuffle(charactersClone);
-        return charactersClone;
-    }
-
     @Override
     public String toString() {
         return "[ Characters: " + Arrays.toString(arrangedCharacters.toArray(new Character[0])) + ", LEVEL: " + level +" ]";
+    }
+
+    public ArrayList<Character> getRandomizedCharacters() {
+        return shuffledCharacters;
     }
 }

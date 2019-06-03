@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,31 +14,35 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="fullCanvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox fx:id="grassClassSample" prefHeight="54.0" prefWidth="600.0" spacing="12.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <padding>
             <Insets left="10.0" top="6.0" />
          </padding>
-         <Button fx:id="externalsettings" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css">
-            <font>
-               <Font name="Comic Sans MS" size="12.0" />
-            </font>
+         <MenuButton fx:id="externalsettings" graphicTextGap="1.0" mnemonicParsing="false" popupSide="TOP" prefHeight="41.0" prefWidth="37.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+           <items>
+             <MenuItem fx:id="aboutUsButton" mnemonicParsing="false" text="ስለኛ" />
+             <MenuItem fx:id="versionLabel" mnemonicParsing="false" text="ethiopis version 1.0.4" />
+           </items>
+            <padding>
+               <Insets bottom="-63.0" right="-15.0" />
+            </padding>
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
-         </Button>
-         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css">
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor></Button>
-         <Button fx:id="mainexit" accessibleHelp="Press again to exit" accessibleText="Press again to exit" cancelButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ውጣ">
+         </MenuButton>
+         <Button fx:id="mainexit" accessibleHelp="Press again to exit" accessibleText="Press again to exit" cancelButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="76.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ውጣ">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
             <font>
                <Font name="System Bold" size="12.0" />
             </font></Button>
+         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" visible="false">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
          <Region prefHeight="48.0" prefWidth="318.0" HBox.hgrow="NEVER" />
          <Button fx:id="nightMode" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css">
             <cursor>
@@ -47,14 +53,14 @@
    <center>
       <BorderPane fx:id="skyClassSample" prefHeight="200.0" prefWidth="200.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <bottom>
-            <AnchorPane prefHeight="130.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="bottomBorderPane" prefHeight="130.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <ImageView fx:id="tree" layoutX="362.0" layoutY="9.0" translateY="15.0">
                   <Image url="@../resources/tree-icon-1534.png" />
                </ImageView>
                <ImageView fx:id="birds" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="-38.0">
                   <Image url="@../resources/birds-png-3497.png" />
                </ImageView>
-               <Button fx:id="playbutton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="እንጫወት!" wrapText="true">
+               <Button fx:id="playbutton" layoutX="59.0" layoutY="70.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="እንጫወት!" wrapText="true">
                   <effect>
                      <DropShadow blurType="GAUSSIAN" color="WHITE" height="23.97" offsetY="1.0" radius="9.26" spread="0.18" width="15.07" />
                   </effect>
@@ -83,6 +89,14 @@
                <ImageView fitHeight="70.0" fitWidth="29.0" layoutX="500.0" layoutY="113.0" preserveRatio="true" translateY="12.0">
                   <Image url="@../resources/icons8-grass-96.png" />
                </ImageView>
+               <Button fx:id="singlePlayer" layoutX="122.0" layoutY="86.0" mnemonicParsing="false" styleClass="menuettes" stylesheets="@../root_styles.css" text="ብቻዬን" visible="false">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor></Button>
+               <Button fx:id="multiPlayer" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" styleClass="menuettes" stylesheets="@../root_styles.css" text="ከጓደኛ ጋር" visible="false">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor></Button>
             </AnchorPane>
          </bottom>
          <center>

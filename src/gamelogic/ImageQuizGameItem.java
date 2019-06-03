@@ -7,13 +7,13 @@ public class ImageQuizGameItem {
 
     private ArrayList<Character> answerText;
     private ArrayList<Character> possibleChoices;
-    private String imagebase64;
+    private String imageResourceName;
     private int gameLevel;
     private ArrayList<Integer> positionToHide;
 
-    public ImageQuizGameItem(ArrayList<Character> answerText, String imagebase64, int gameLevel) {
+    public ImageQuizGameItem(ArrayList<Character> answerText, String imageResourceName, int gameLevel) {
         this.answerText = answerText;
-        this.imagebase64 = imagebase64;
+        this.imageResourceName = imageResourceName;
         this.gameLevel = gameLevel;
         Random random = new Random();
         random.setSeed(new Date().getTime());
@@ -49,12 +49,12 @@ public class ImageQuizGameItem {
         this.possibleChoices = possibleChoices;
     }
 
-    public String getImagebase64() {
-        return imagebase64;
+    public String getImageResourceName() {
+        return imageResourceName;
     }
 
-    public void setImagebase64(String imagebase64) {
-        this.imagebase64 = imagebase64;
+    public void setImageResourceName(String imageResourceName) {
+        this.imageResourceName = imageResourceName;
     }
 
     public int getGameLevel() {
@@ -74,6 +74,7 @@ public class ImageQuizGameItem {
     }
 
     public ArrayList<Integer> getPositionToHide() {
+        positionToHide.sort((o1, o2) -> (o1 > o2) ? 0 : -1);
         return positionToHide;
     }
 
@@ -145,7 +146,7 @@ public class ImageQuizGameItem {
     public String toString() {
         return "[" + Arrays.toString(answerText.toArray(new Character[0]))
                 + "] , [" + Arrays.toString(possibleChoices.toArray(new Character[0]))
-                + "] , [" + imagebase64
+                + "] , [" + imageResourceName
                 + "] , [" + Arrays.toString(positionToHide.toArray(new Integer[0]))
                 + "] , [" + gameLevel + "]";
     }

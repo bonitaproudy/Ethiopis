@@ -11,11 +11,11 @@ public class ImageQuizGame {
     private int level;
 
     private ArrayList<ImageQuizGameItem> sampleGameItems = new ArrayList<>(asList(
-            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ብ', 'ር')) , "base64imagetextalphatestone", LEVEL_EASY),
-            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ብ', 'ረ', 'ተ', 'ሰ', 'ብ')) , "base64imagetextalphatesttwo", LEVEL_EASY),
-            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ይ', 'ወ', 'ት')) , "base64imagetextalphatestthree", LEVEL_EASY),
-            new ImageQuizGameItem(new ArrayList<>(asList('ላ', 'ም')) , "base64imagetextalphatestfour", LEVEL_EASY),
-            new ImageQuizGameItem(new ArrayList<>(asList('በ', 'ር', 'ጩ', 'ማ')) , "base64imagetextalphatestfive", LEVEL_EASY)
+            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ብ', 'ር')) , "resources/unity_32px.png", LEVEL_EASY),
+            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ብ', 'ረ', 'ተ', 'ሰ', 'ብ')) , "resources/community_50px.png", LEVEL_EASY),
+            new ImageQuizGameItem(new ArrayList<>(asList('ህ', 'ይ', 'ወ', 'ት')) , "resources/heart_with_pulse_48px.png", LEVEL_EASY),
+            new ImageQuizGameItem(new ArrayList<>(asList('ላ', 'ም')) , "resources/cow_48px.png", LEVEL_EASY),
+            new ImageQuizGameItem(new ArrayList<>(asList('በ', 'ር', 'ጩ', 'ማ')) , "resources/chair_48px.png", LEVEL_EASY)
     ));
 
     public ImageQuizGame(int level) throws IllegalArgumentException{
@@ -39,7 +39,7 @@ public class ImageQuizGame {
     public ImageQuizGameItem giveMeAQuestion() {
         if (isLevelNotValid(level)) throw new IllegalArgumentException("Invalid level type: " + level);
         ImageQuizGameItem game = sampleGameItems.get(new Random().nextInt(sampleGameItems.size()));
-        ImageQuizGameItem actualGame = new ImageQuizGameItem(game.getAnswerText(), game.getImagebase64(), level);
+        ImageQuizGameItem actualGame = new ImageQuizGameItem(game.getAnswerText(), game.getImageResourceName(), level);
         return actualGame;
     }
 

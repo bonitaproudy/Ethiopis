@@ -68,7 +68,10 @@ public class RearrangeCharacterGame {
         } while (characterList.size() < size);
 
         characterList.sort((o1, o2) -> (o1.position > o2.position) ? 0 : -1);
+        ArrayList<Character> arrangedCharacters = splitOnlyCharacters(characterList);
+        ArrayList<Character> charactersClone = (ArrayList<Character>) arrangedCharacters.clone();
+        Collections.shuffle(charactersClone);
 
-        return new RearrangeCharacterGameItem(splitOnlyCharacters(characterList), level);
+        return new RearrangeCharacterGameItem(splitOnlyCharacters(characterList), charactersClone, level);
     }
 }

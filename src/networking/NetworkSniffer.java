@@ -3,6 +3,8 @@ package networking;
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 import static networking.MultiplayerServer.ETHIOPIS_PORT;
 import static networking.MultiplayerServer.ETHIOPIS_SNIFFER__PORT;
@@ -10,7 +12,7 @@ import static networking.MultiplayerServer.ETHIOPIS_SNIFFER__PORT;
 public class NetworkSniffer {
 
     private OnServerFoundCallback mainCallback;
-    private CustomThreadPool mainThreadPool;
+    private ExecutorService mainThreadPool;
     private boolean isHostFound = false;
 
     NetworkSniffer(OnServerFoundCallback mainCallback) {
@@ -82,6 +84,7 @@ public class NetworkSniffer {
             try {
                 Socket tester = new Socket((Inet4Address.getByAddress(address)), ETHIOPIS_SNIFFER__PORT);
                 System.out.println("Failed to connect to : " + getIpFromBytes(ipNormalizer(address)));
+                tester.close();
                 return true;
             } catch (ConnectException x) {
                 x.printStackTrace();
@@ -93,7 +96,7 @@ public class NetworkSniffer {
         }
     }
 
-    void findServerInMyNetwork(CustomThreadPool threadPool) throws IOException {
+    void findServerInMyNetwork(ExecutorService threadPool) throws IOException {
         new Thread(() -> {
             if (mainThreadPool == null) mainThreadPool = threadPool;
             byte[] address = new byte[0];
