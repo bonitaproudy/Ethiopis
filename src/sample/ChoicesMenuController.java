@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -153,6 +154,9 @@ public class ChoicesMenuController implements Initializable {
             difficultyLabelHard.setTextFill(new Color(1,1,1,1));
             difficultyLabelMedium.setTextFill(new Color(1,1,1,1));
             difficultyLabelSelect.setTextFill(new Color(1,1,1,1));
+            getDiffEasyButton().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getDiffHardButton().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getDiffMediumButton().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
         }
         else{
             new Controller().setDayMode(skyClassChoices,grassClassChoices,"CHOICES");
@@ -160,6 +164,9 @@ public class ChoicesMenuController implements Initializable {
             difficultyLabelHard.setTextFill(new Color(0,0,0,1));
             difficultyLabelMedium.setTextFill(new Color(0,0,0,1));
             difficultyLabelSelect.setTextFill(new Color(0,0,0,1));
+            getDiffEasyButton().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getDiffHardButton().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getDiffMediumButton().setStyle("-fx-background-color: #fff400");
         }
 
         cloudsAnimation();

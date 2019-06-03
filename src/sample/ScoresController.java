@@ -65,15 +65,40 @@ public class ScoresController implements Initializable {
         getWinOrLose().setText("ተሸነፍክ...");
         getWinLoseImage().setImage(new Image("resources/sad_48px.png"));
     }
-    public void onPlayOnClick(){
+    public void onPlayOnClick() throws IOException {
         if(GameModesListController.gameMode == 1){
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("imageQuiz.fxml"));
+            ImageQuizController controller = new ImageQuizController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
         }
         else if(GameModesListController.gameMode == 2){
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("matchingQuiz.fxml"));
+            MatchingQuizController controller = new MatchingQuizController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
         }
         else if(GameModesListController.gameMode == 3){
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("rearrangeQuiz.fxml"));
+            RearrangeQuizController controller = new RearrangeQuizController();
+            loader.setController(controller);
+            Parent root = null;
+            root = loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
         }
     }
     public void onBackToMenuClick() throws IOException {
@@ -90,6 +115,7 @@ public class ScoresController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        getWinOrLose().setStyle("-fx-font-size: 35");
         if(Controller.nightModeStatus == 1){
             new Controller().setNightMode(skyClassScores,grassClassScores,"IMAGE");
             getBackToMenu().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
@@ -114,6 +140,12 @@ public class ScoresController implements Initializable {
                 e.printStackTrace();
             }
         });
-        getPlayOn().setOnAction(event -> onPlayOnClick());
+        getPlayOn().setOnAction(event -> {
+            try {
+                onPlayOnClick();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

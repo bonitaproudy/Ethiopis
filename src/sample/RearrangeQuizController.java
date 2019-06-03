@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -18,17 +19,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import networking.MultiplayerClient;
+import networking.MultiplayerServer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class ChoiceQuizController implements Initializable {
+public class RearrangeQuizController implements Initializable {
     //universal Declarations
     private Stage primaryStage;
     Timer buttonFlipTimer = new Timer();
+    private RearrangeCharacterGameItem gameItem;
+    private MultiplayerServer server;
+    private MultiplayerClient client;
     public int buttonsSelected = 0;
     int iter = 0;
+    int buttonsClicked = 0;
     ArrayList<Character> characters;
     ArrayList<Button> selectedButtons = new ArrayList<>();
     //button declaration
@@ -44,10 +51,11 @@ public class ChoiceQuizController implements Initializable {
     public Button choice7;
     public Button choice8;
     Button[] choicesArray = {getChoice1(),getChoice2(),getChoice3(),getChoice4(),getChoice5(),getChoice6(),getChoice7(),getChoice8()};
-
+    ArrayList<Button> clickedButtons = new ArrayList<>();
     //other element declaration
     public BorderPane skyClassChoiceQuiz;
     public HBox grassClassChoiceQuiz;
+    public Label gameExplainLabel;
 
     public Button getChoice1() {
         return choice1;
@@ -80,12 +88,19 @@ public class ChoiceQuizController implements Initializable {
     public Button getChoice8() {
         return choice8;
     }
+
     public Button getInternalSkip() {
         return internalSkip;
     }
+
     public Button getInternalHome() {
         return internalHome;
     }
+
+    public Label getGameExplainLabel() {
+        return gameExplainLabel;
+    }
+
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -124,6 +139,19 @@ public class ChoiceQuizController implements Initializable {
         flipButtonsStartingFromIndex(indexOfY, gameItem);
     }
 
+    public RearrangeQuizController() {
+    }
+
+    public RearrangeQuizController(RearrangeCharacterGameItem gameItem, MultiplayerClient client) {
+        this.gameItem = gameItem;
+        this.client = client;
+    }
+
+    public RearrangeQuizController(RearrangeCharacterGameItem gameItem, MultiplayerServer server) {
+        this.gameItem = gameItem;
+        this.server = server;
+    }
+
     private void flipButtonsStartingFromIndex(int i, RearrangeCharacterGameItem gameItem) {
         ArrayList<Button> buttons = new ArrayList<>();
         for (int j = i; j < choicesArray.length; j++) buttons.add(choicesArray[j]);
@@ -132,6 +160,9 @@ public class ChoiceQuizController implements Initializable {
 
     public void flipButton(List<Button> buttons, RearrangeCharacterGameItem gameItem) {
         for (Button button : buttons) button.setRotationAxis(new Point3D(0, 1, 0));
+
+        // redraw characters into the buttons
+        characters.forEach(character ->choicesArray[characters.indexOf(character)].setText(character + ""));
         new Thread(() -> {
             for (iter = 0; iter < 180; iter++) {
                 try {
@@ -140,10 +171,6 @@ public class ChoiceQuizController implements Initializable {
                     e.printStackTrace();
                 }
                 Platform.runLater(() -> {
-                    if (iter == 90){
-                        // redraw characters into the buttons
-                        characters.forEach(character ->choicesArray[characters.indexOf(character)].setText(character + ""));
-                    }
                     for(Button button: buttons) button.setRotate(iter > 90 ? 180 - iter : iter);
                 });
             }
@@ -153,12 +180,18 @@ public class ChoiceQuizController implements Initializable {
                 Platform.runLater(() -> {
                     try {
                         toScores();
+                        kedem();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
             }
         }).start();
+    }
+
+    private void kedem() {
+        if (server != null) server.kedem();
+        else if (client != null) client.kedem();
     }
 
     public void flipButton(Button buttonToFlip1, Button buttonToFlip2, RearrangeCharacterGameItem gameItem){
@@ -260,14 +293,33 @@ public class ChoiceQuizController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(Controller.nightModeStatus == 1){
-            new Controller().setNightMode(skyClassChoiceQuiz,grassClassChoiceQuiz,"CHOICEQUIZ");
+            new Controller().setNightMode(getSkyClassChoiceQuiz(),getGrassClassChoiceQuiz(),"REARRANGEQUIZ");
             getInternalHome().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
             getInternalSkip().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice1().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice2().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice3().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice4().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice5().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice6().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice7().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice8().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getGameExplainLabel().setStyle("-fx-text-fill: rgb(255,255,255)");
         }
         else{
-            new Controller().setDayMode(skyClassChoiceQuiz,grassClassChoiceQuiz,"CHOICEQUIZ");
+            new Controller().setDayMode(getSkyClassChoiceQuiz(),getGrassClassChoiceQuiz(),"REARRANGEQUIZ");
             getInternalSkip().setStyle("-fx-background-color: rgb(255, 244, 0)");
             getInternalHome().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice1().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice2().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice3().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice4().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice5().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice6().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice7().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice8().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getGameExplainLabel().setStyle("-fx-text-fill: rgb(0,0,0)");
+
         }
         getBackToMe().setOnAction(event -> {
             try {
@@ -290,14 +342,15 @@ public class ChoiceQuizController implements Initializable {
                 e.printStackTrace();
             }
         });
-//        flipButton(getChoice1(),getChoice2());
 
         //GAME LOGIC =====
-        RearrangeCharacterGame rearrangeCharacterGame = new RearrangeCharacterGame(ChoicesMenuController.difficulty);
-        RearrangeCharacterGameItem rearrangeCharacterGameItem = rearrangeCharacterGame.getASingleGame(8);
+        if (gameItem == null) {
+            RearrangeCharacterGame rearrangeCharacterGame = new RearrangeCharacterGame(ChoicesMenuController.difficulty);
+            gameItem = rearrangeCharacterGame.getASingleGame(8);
+        }
 
-        characters = rearrangeCharacterGameItem.getRandomizedCharacters();
-        System.out.println((rearrangeCharacterGameItem.toString()));
+        characters = gameItem.getRandomizedCharacters();
+        System.out.println((gameItem.toString()));
         setupButtonsArrayList();
 
         characters.forEach(character -> choicesArray[characters.indexOf(character)].setText(character + ""));
@@ -305,10 +358,20 @@ public class ChoiceQuizController implements Initializable {
 //        ========================================
         for (Button button : choicesArray) {
             button.setOnAction(event -> {
+                buttonsClicked++;
+                if (buttonsClicked == 1){
+                    button.setDisable(true);
+                    clickedButtons.add(button);
+                }
+                else if(buttonsClicked == 2){
+                    clickedButtons.get(0).setDisable(false);
+                    buttonsClicked = 0;
+                    clickedButtons.clear();
+                }
                 selectedButtons.add(buttonsSelected, button);
                 if (buttonsSelected == 1) {
                     buttonsSelected = -1;
-                    flipCharacterArrayItems(selectedButtons.get(0).getText().charAt(0), selectedButtons.get(1).getText().charAt(0), rearrangeCharacterGameItem);
+                    flipCharacterArrayItems(selectedButtons.get(0).getText().charAt(0), selectedButtons.get(1).getText().charAt(0), gameItem);
                 }
                 buttonsSelected++;
             });

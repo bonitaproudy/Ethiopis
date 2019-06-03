@@ -97,6 +97,18 @@ public class ImageQuizController implements Initializable {
         return internalSkip;
     }
 
+    public BorderPane getSkyClassImageQuiz() {
+        return skyClassImageQuiz;
+    }
+
+    public HBox getGrassClassImageQuiz() {
+        return grassClassImageQuiz;
+    }
+
+    public TextField getAnswerTextField() {
+        return answerTextField;
+    }
+
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -192,14 +204,32 @@ public class ImageQuizController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(Controller.nightModeStatus == 1){
-            new Controller().setNightMode(skyClassImageQuiz,grassClassImageQuiz,"IMAGE");
+            new Controller().setNightMode(getSkyClassImageQuiz(),getGrassClassImageQuiz(),"IMAGEQUIZ");
             getInternalHome().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
             getInternalSkip().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice1().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice2().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice3().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice4().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice5().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice6().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice7().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice8().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getAnswerTextField().setStyle("-fx-text-fill: rgb(255,255,255)");
         }
         else{
-            new Controller().setDayMode(skyClassImageQuiz,grassClassImageQuiz,"IMAGE");
+            new Controller().setDayMode(getSkyClassImageQuiz(),getGrassClassImageQuiz(),"IMAGEQUIZ");
             getInternalSkip().setStyle("-fx-background-color: rgb(255, 244, 0)");
             getInternalHome().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice1().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice2().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice3().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice4().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice5().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice6().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice7().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice8().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getAnswerTextField().setStyle("-fx-text-fill: rgb(0,0,0)");
         }
 
         getInternalSkip().setOnAction((event) -> {
@@ -243,6 +273,7 @@ public class ImageQuizController implements Initializable {
 //                }
 //            }
 //        }
+        System.out.println(gameItem.getAnswerText().toString());
 
         for (int positionToHide : gameItem.getPositionToHide()) {
             characters.remove(positionToHide);
@@ -250,9 +281,10 @@ public class ImageQuizController implements Initializable {
         }
 
         answerTextField.setText(generateTextFromCharacters(characters));
-        positionHidden = gameItem.getPositionToHide().get(x);
+        //positionHidden = gameItem.getPositionToHide().get(x);
 
         for (Button button:buttons) { button.setOnAction(event -> {
+            positionHidden = characters.indexOf('_');
             if (gameItem.isUserChoiceCorrect(positionHidden, button.getText().charAt(0))) {
                 button.setDisable(true);
                 characters.remove(positionHidden);
@@ -282,14 +314,8 @@ public class ImageQuizController implements Initializable {
                     }
                 }, 1000);
             }
-            int underscoreCount = 0;
-            for (char character:characters
-                 ) {
-                if(character == '_'){
-                    underscoreCount++;
-                }
-            }
-            if(underscoreCount == 0){
+
+            if(!characters.contains('_')){
                 Controller.win = 1;
                 try {
                     toScores();
@@ -300,9 +326,7 @@ public class ImageQuizController implements Initializable {
         });
         }
 
-        for (Button button: buttons) {
-
-        }
+        quizPic.setImage(new Image(gameItem.getImageResourceName()));
         System.out.println(gameItem.getAnswerText());
         System.out.println(gameItem.getPositionToHide());
         System.out.println(gameItem.getPossibleChoices());

@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,11 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -67,7 +73,6 @@ public class TheCloudsController implements Initializable {
         loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
-
         controller.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -102,7 +107,7 @@ public class TheCloudsController implements Initializable {
                     else if (getMotionCloud3().getLayoutX()>=327){
                         try {
                             this.cancel();
-                            anyButtonClicked();
+                             anyButtonClicked();
 
                         } catch (IOException e) {
                             e.printStackTrace();

@@ -1,9 +1,7 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -104,8 +102,8 @@ public class GameModesListController implements Initializable {
     }
     public void onChoiceQuizButtonClick() throws IOException{
         gameMode = 3;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("choiceQuiz.fxml"));
-        ChoiceQuizController controller = new ChoiceQuizController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("rearrangeQuiz.fxml"));
+        RearrangeQuizController controller = new RearrangeQuizController();
         loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
@@ -147,6 +145,12 @@ public class GameModesListController implements Initializable {
             difficultyLabelHard.setTextFill(new Color(0,0,0,1));
             difficultyLabelMedium.setTextFill(new Color(0,0,0,1));
             difficultyLabelSelect.setTextFill(new Color(0,0,0,1));
+            getDiffEasyButton().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getDiffHardButton().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getDiffMediumButton().setStyle("-fx-background-color: #fff400");
+            getChoiceQuizButton().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getMatchingQuizButton().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getImageQuizButton().setStyle("-fx-background-color: #fff400");
         }
         getImageQuizButton().setOnAction(event -> {
             try {

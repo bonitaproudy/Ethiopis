@@ -1,30 +1,26 @@
 package sample;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point3D;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,11 +28,14 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
 public class Controller implements Initializable {
     //Global declarations
     private Stage primaryStage;
     Timer settingsPlayTimer = new Timer();
     Timer iterateClouds = new Timer();
+    Timer playButtonMotion = new Timer();
     double counter=0;
     public int muteStatus = 0;
     static int nightModeStatus = 0;
@@ -44,15 +43,21 @@ public class Controller implements Initializable {
     double clickedNumber = 4;
     Image muted = new Image("resources/unmute-toggle.png",30,30,false,true);
     Image notMuted = new Image("resources/mute-toggle.png",30,30,false,true);
-    final ContextMenu popup = new ContextMenu();
-    MenuItem help = new MenuItem("help");
-    MenuItem about = new MenuItem("about");
+    Timer aboutUsTimer = new Timer();
+    static boolean isPlaying;
+    static MediaPlayer player;
+
     //buttons
     public Button playbutton;
-    public Button externalsettings;
     public Button externalmute;
     public Button mainexit;
     public Button nightMode;
+    public Button singlePlayer;
+    public Button multiPlayer;
+    public MenuButton externalsettings;
+    public MenuItem aboutUsButton;
+    public MenuItem aboutUsLabel;
+
     //clouds and other floaters
     public ImageView cloud1;
     public ImageView cloud2;
@@ -61,19 +66,25 @@ public class Controller implements Initializable {
     public ImageView birds;
     public ImageView tree;
     public ImageView sheep;
+
     //containers
+    public BorderPane fullCanvas;
     public BorderPane skyClassSample;
     public HBox grassClassSample;
 
     //getters
     public Stage getPrimaryStage(){return primaryStage;}
 
-    public MenuItem getHelp() {
-        return help;
+    public MenuItem getAboutUsButton() {
+        return aboutUsButton;
     }
 
-    public MenuItem getAbout() {
-        return about;
+    public MenuItem getAboutUsLabel() {
+        return aboutUsLabel;
+    }
+
+    public MenuButton getExternalsettings() {
+        return externalsettings;
     }
 
     public ImageView getCloud1() {
@@ -112,16 +123,22 @@ public class Controller implements Initializable {
         return externalmute;
     }
 
-    public Button getExternalsettings() {
-        return externalsettings;
-    }
-
     public Button getPlaybutton() {
         return playbutton;
     }
 
     public Button getNightMode() {
         return nightMode;
+    }
+
+    public Button getSinglePlayer () { return singlePlayer;}
+
+    public Button getMultiPlayer() {
+        return multiPlayer;
+    }
+
+    public BorderPane getFullCanvas() {
+        return fullCanvas;
     }
 
     public BorderPane getSkyClassSample() {
@@ -135,61 +152,59 @@ public class Controller implements Initializable {
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
-    //setup initial looks of elements
-
-    public void onExternalSettingsClicked(double clicked){
-        Popup setting = new Popup();
-        setting.setX(400);
-        setting.setY(350);
-        setting.setHeight(150);
-        setting.setWidth(150);
-        VBox settingsPane = new VBox(20);
-        settingsPane.setPrefHeight(100);
-        settingsPane.setPrefWidth(100);
-        if(nightModeStatus == 0){
-            settingsPane.setStyle("-fx-background-color: #22ff1a;"  + "-fx-border-radius: 10;" + "-fx-border:10 solid #aaa;");
-        }
-        else if(nightModeStatus == 1){
-            settingsPane.setStyle("-fx-background-color: rgba(15,84,16,0.9);"  + "-fx-border-radius: 10;" + "-fx-border:10 solid #aaa;");
-        }
-        settingsPane.setAlignment(Pos.CENTER);
-        Button aboutButton = new Button("ስለኛ");
-        aboutButton.setStyle(" -fx-text-align:center;" + "-fx-text-decoration:bold;" + "-fx-border:1.5px solid #aaa;" + "-fx-border-radius:30px;" + "-fx-background-color: rgb(255, 244, 0);" + "-fx-overflow:hidden;" + "-fx-font-family: \"Nyala\";" + "-fx-font-size: 20;" + "-fx-font-style: Bold;");
-        Label versionLabel = new Label("ethiopis Version 1.0.4");
-        settingsPane.getChildren().addAll(aboutButton,versionLabel);
-        setting.getContent().addAll(settingsPane);
-        about.setOnAction(event -> {
-            Popup aboutPopup = new Popup();
-            aboutPopup.setX(400);
-            aboutPopup.setY(350);
-            aboutButton.setPrefHeight(150);
-            aboutButton.setPrefWidth(150);
-            VBox aboutPopupPane = new VBox(20);
-            Label aboutUs = new Label("ይሄ መተግበሪያ የተሰራው በ: \n\t\t\t-ብሩክ መዝገቡ \n\t\t\t-በረከት ተረፈ \n\t\t\t-አብርሃም ትርፌ \n\t\t\t-ቦንቱ ግርማ \n\t\t\t-ብስራት በትረ  \n\t\t\t-ብሩክ ጌታቸው ");
-            aboutPopupPane.setStyle("-fx-background-color: rgba(15,84,16,0.9);"  + "-fx-border-radius: 10;" + "-fx-border:10 solid #aaa;");
-            aboutPopupPane.getChildren().addAll(aboutUs);
-            aboutPopup.getContent().addAll(aboutPopupPane);
-            aboutPopup.show(primaryStage);
-            aboutPopup.setAutoHide(true);
-        });
-        setting.show(primaryStage);
-        if (clicked%2 == 0){
-            System.out.println("nothidden");
-        }
-        else{
-            settingsPlayTimer.schedule(new TimerTask() {
+    //makes the playme button (when clicked) take one to the next page
+    public void onPlayButtonClick (int waywards) throws IOException {
+        if (waywards == 1){
+            iterateClouds.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(() -> setting.hide());
+                    Platform.runLater(() -> {
+                        if (getPlaybutton().getTranslateY() >= -20){
+                            getPlaybutton().setTranslateY((getPlaybutton().getTranslateY()) - 1);
+                            getPlaybutton().setLayoutY((getPlaybutton().getLayoutY()) - 1);
+                        }
+                        else{
+                            this.cancel();
+                        }
+                    });
                 }
-            }, 1000);
-            System.out.println("hidden");
+            }, 0, 10);
+            getSinglePlayer().setVisible(true);
+            getMultiPlayer().setVisible(true);
+        }
+        else if(waywards == 0){
+            getSinglePlayer().setVisible(false);
+            getMultiPlayer().setVisible(false);
+            iterateClouds.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        if (getPlaybutton().getTranslateY() <= 0){
+                            getPlaybutton().setTranslateY((getPlaybutton().getTranslateY()) + 1);
+                            getPlaybutton().setLayoutY((getPlaybutton().getLayoutY()) + 1);
+                        }
+                        else{
+                            this.cancel();
+                        }
+                    });
+                }
+            }, 0, 10);
         }
     }
-    //makes the playme button (when clicked) take one to the next page
-    public void onPlayButtonClick () throws IOException {
+    public void onSinglePlayerClicked () throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleTransition.fxml"));
         SampleTransitionController controller = new SampleTransitionController();
+        loader.setController(controller);
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 600, 400);
+        controller.setPrimaryStage(primaryStage);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+    public void onMultiplayerClicked () throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("serverClient.fxml"));
+        ServerClientController controller = new ServerClientController();
         loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
@@ -206,6 +221,15 @@ public class Controller implements Initializable {
         else if(muteStatus == 1){
             externalmute.setGraphic(new ImageView(notMuted));
             muteStatus = 0;
+        }
+        if (isPlaying) {
+            isPlaying = false;
+            player.stop();
+        }
+        else {
+            isPlaying = true;
+            player.play();
+
         }
     }
 
@@ -244,6 +268,8 @@ public class Controller implements Initializable {
            getExternalsettings().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
            getMainexit().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
            getPlaybutton().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+           getSinglePlayer().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+           getMultiPlayer().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
            getSunshine().setImage(new Image("/resources/full_moon_100px.png"));
            getSunshine().setFitWidth(150);
            getSunshine().setFitHeight(150);
@@ -263,6 +289,8 @@ public class Controller implements Initializable {
             getExternalsettings().setStyle("-fx-background-color: rgb(255, 244, 0)");
             getMainexit().setStyle( "-fx-background-color: rgb(255, 244, 0)");
             getPlaybutton().setStyle("-fx-background-color: #fff400");
+            getSinglePlayer().setStyle("-fx-background-color: #fff400");
+            getMultiPlayer().setStyle("-fx-background-color: #fff400");
             getSunshine().setImage(new Image("/resources/sunshine-icon-32866.png"));
             getSunshine().setFitWidth(198);
             getSunshine().setFitHeight(200);
@@ -286,31 +314,109 @@ public class Controller implements Initializable {
      getMainexit().setOnAction(event -> System.exit(0));
     }
 
+    public void musicPlay(){
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        /*try {
-            MusicClass.getInstance();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }*/
-        getExternalsettings().setOnAction(event -> {
-            onExternalSettingsClicked(clickedNumber);
-            clickedNumber++;
-        } );
-
-        getExternalmute().setOnAction(event -> onMuteButtonClick());
-        getPlaybutton().setOnAction(event -> {
+        Thread musicThread = new Thread(() ->{
             try {
-                onPlayButtonClick();
+                String uriString = new File("C:\\Users\\rav3n\\Documents\\GitHub\\Ethiopis\\src\\resources\\02-title-theme.mp3").toURI().toURL().toString();
+                player= new MediaPlayer(new Media(uriString));
+                if (!isPlaying){
+                    player.play();
+                    isPlaying = true;
+                }
+                System.out.println("finished play... apearantly.");
+                Thread.sleep(10);
+            } catch (MalformedURLException | InterruptedException e) {
+                e.printStackTrace();
+                player.stop();
+            }
+        });
+        musicThread.start();
+        getExternalmute().setOnAction(event ->{
+        });
+//        try {
+//            AudioStream audioStream = new AudioStream(new FileInputStream("../resources/02-title-theme.mp3"));
+//            AudioPlayer.player.start(audioStream);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        aboutUsButton.setStyle(" -fx-text-align:center;" + "-fx-text-decoration:bold;" + "-fx-border:1.5px solid #aaa;" + "-fx-border-radius:30px;"  + "-fx-overflow:hidden;" + "-fx-font-family: \"Nyala\";" + "-fx-font-size: 20;" + "-fx-font-style: Bold;");
+        // MenuItem aboutUsItem = new MenuItem("ስለኛ" );
+//        aboutUsItem.setStyle(" -fx-text-align:center;" + "-fx-text-decoration:bold;" + "-fx-border:1.5px solid #aaa;" + "-fx-border-radius:30px;" + "-fx-background-color: rgb(255, 244, 0);" + "-fx-overflow:hidden;" + "-fx-font-family: \"Nyala\";" + "-fx-font-size: 20;" + "-fx-font-style: Bold;");
+//        MenuItem aboutUsLabelItem = new MenuItem("ethiopis version 1.0.4");
+//        aboutUsLabelItem.setStyle("-fx-font-family: Nyala;" + "-fx-fill: rgb(0,0,0,1);");
+//        getExternalsettings().getItems().addAll(aboutUsItem,aboutUsLabelItem);
+//        VBox aboutPopupPane = new VBox(5);
+        Label aboutUs = new Label("ይሄ መተግበሪያ የተሰራው በ: \n\t\t\t-ብሩክ መዝገቡ \n\t\t\t-በረከት ተረፈ \n\t\t\t-አብርሃም ትርፌ \n\t\t\t-ቦንቱ ግርማ \n\t\t\t-ብስራት በትረ  \n\t\t\t-ብሩክ ጌታሁን ");
+        aboutUs.setStyle("-fx-font-family: Nyala;" + "-fx-fill: rgb(0,0,0,1); " + "-fx-font-size: 25;");
+        aboutUsButton.setOnAction(event -> {
+            Popup aboutPopup = new Popup();
+            aboutPopup.setX(400);
+            aboutPopup.setY(350);
+//                aboutButton.setPrefHeight(150);
+//                aboutButton.setPrefWidth(150);
+            aboutPopup.getContent().addAll(aboutUs);
+            aboutPopup.show(primaryStage);
+            aboutPopup.setAutoHide(true);
+            aboutUsTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> aboutPopup.hide());
+                }
+            }, 5000);
+        });
+//        URL resource = getClass().getResource("file:C:\\Users\\rav3n\\Documents\\GitHub\\Ethiopis\\src\\resources\\02-title-theme.mp3");
+//        Media marioSong = new Media(resource.toString());
+//        MediaPlayer player = new MediaPlayer(marioSong);
+//        player.play();
+
+//        try {
+//            MusicClass.getInstance().music();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+
+//        getExternalsettings().setOnAction(event -> {
+//            onExternalSettingsClicked(1);
+//        } );
+        getSinglePlayer().setOnAction(event -> {
+            try {
+                onSinglePlayerClicked();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+        getMultiPlayer().setOnAction(event -> {
+            try {
+                onMultiplayerClicked();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        getExternalmute().setOnAction(event -> onMuteButtonClick());
+        getPlaybutton().setOnAction(event -> {
+            try {
+                onPlayButtonClick(1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        getSkyClassSample().setOnMouseClicked(event -> {
+            try {
+                onPlayButtonClick(0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            onExternalSettingsClicked(0);
+        });
         getMainexit().setOnAction(event -> onExitButtonClick());
         getNightMode().setOnAction(event -> onNightModeClick());
         Tooltip exitTwice = new Tooltip("ለመውጣት ደግምው ይጫኑ...");
-        exitTwice.setShowDelay(new Duration(10));
+        //exitTwice.setShowDelay(new Duration(10));
         exitTwice.setFont(new Font("Nyala",12));
         if(nightModeStatus == 0){
             setDayMode(getSkyClassSample(),getGrassClassSample(),"SAMPLE");

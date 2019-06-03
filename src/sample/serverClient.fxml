@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane fx:id="skyClassClientServer" prefHeight="319.0" prefWidth="600.0" styleClass="mostOfArea" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="createServerButton" layoutX="173.0" layoutY="141.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="97.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ፍጠር" />
+                  <Button fx:id="joinServerButton" layoutX="334.0" layoutY="141.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="97.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ተገናኝ" />
+                  <Button fx:id="backToMe" layoutX="7.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ImageView fx:id="sheepAnim" layoutX="136.0" layoutY="256.0" translateY="12.0">
+                     <image>
+                        <Image url="@../resources/icons8-sheep-96.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="loadingAnimation" layoutX="284.0" layoutY="84.0" visible="false">
+                     <image>
+                        <Image url="@../resources/spinner_frame_8_32px.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="waitingLabel" layoutX="254.0" layoutY="141.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="በመጠበቅ ላይ" visible="false" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </center>
+   <bottom>
+      <HBox fx:id="grassClassClientServer" prefHeight="48.0" prefWidth="600.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

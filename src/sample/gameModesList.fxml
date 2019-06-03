@@ -19,15 +19,15 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="imageQuizButton" layoutX="208.0" layoutY="61.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ምስል መገመት">
+                  <Button fx:id="imageQuizButton" layoutX="208.0" layoutY="61.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ይቺ ምንድን ናት?">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="matchingQuizButton" layoutX="208.0" layoutY="158.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ማዛመድ">
+                  <Button fx:id="matchingQuizButton" layoutX="208.0" layoutY="158.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ቤተሰብ መፈለግ">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="choiceQuizButton" layoutX="208.0" layoutY="254.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ምርጫ">
+                  <Button fx:id="choiceQuizButton" layoutX="208.0" layoutY="254.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="220.0" styleClass="bigButton" stylesheets="@../root_styles.css" text="ቃሎቹን ደርደሩ">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>

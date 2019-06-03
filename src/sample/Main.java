@@ -2,13 +2,22 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Main extends Application {
     @Override

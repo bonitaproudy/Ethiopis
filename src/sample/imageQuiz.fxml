@@ -34,8 +34,8 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="quizPic" fitHeight="125.0" fitWidth="225.0" layoutX="188.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <GridPane layoutX="11.0" layoutY="190.0" prefHeight="150.0" prefWidth="580.0">
+                  <ImageView fx:id="quizPic" fitHeight="125.0" fitWidth="225.0" layoutX="231.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+                  <GridPane layoutX="12.0" layoutY="195.0" prefHeight="150.0" prefWidth="580.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -88,7 +88,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <TextField fx:id="answerTextField" layoutX="148.0" layoutY="161.0" prefHeight="25.0" prefWidth="308.0" style="-fx-alignment: center;" />
+                  <TextField fx:id="answerTextField" alignment="CENTER" layoutX="148.0" layoutY="161.0" prefHeight="25.0" prefWidth="308.0" />
                </children>
             </AnchorPane>
          </center>

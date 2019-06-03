@@ -117,6 +117,10 @@ public class MatchingQuizController implements Initializable {
         return grassClassMatchingQuiz;
     }
 
+    public Label getGameExplainLabel() {
+        return gameExplainLabel;
+    }
+
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -209,11 +213,29 @@ public class MatchingQuizController implements Initializable {
             new Controller().setNightMode(getSkyClassMatchingQuiz(),getGrassClassMatchingQuiz(),"MATCHINGQUIZ");
             getInternalHome().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
             getInternalSkip().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice1().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice2().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice3().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice4().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice5().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice6().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice7().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getChoice8().setStyle("-fx-background-color: rgba(200, 200, 200,1)");
+            getGameExplainLabel().setStyle("-fx-text-fill: rgb(255,255,255)");
         }
         else{
             new Controller().setDayMode(getSkyClassMatchingQuiz(),getGrassClassMatchingQuiz(),"MATCHINGQUIZ");
             getInternalSkip().setStyle("-fx-background-color: rgb(255, 244, 0)");
             getInternalHome().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice1().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice2().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice3().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice4().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice5().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice6().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getChoice7().setStyle("-fx-background-color: rgb(255, 244, 0)");
+            getChoice8().setStyle( "-fx-background-color: rgb(255, 244, 0)");
+            getGameExplainLabel().setStyle("-fx-text-fill: rgb(0,0,0)");
         }
 
         getBackToMe().setOnAction(event -> {

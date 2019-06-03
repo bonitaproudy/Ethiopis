@@ -19,15 +19,17 @@
                </children>
             </AnchorPane>
          </bottom>
-         <top>
-            <Label fx:id="winOrLose" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-         </top>
          <center>
-            <ImageView fx:id="winLoseImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="winLoseImage" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="winOrLose" layoutX="259.0" layoutY="38.0" styleClass="defaultLabelFont" stylesheets="@../root_styles.css" text="adasdadads">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
    </center>
