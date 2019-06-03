@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="fullCanvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="fullCanvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@../root_styles.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox fx:id="grassClassSample" prefHeight="54.0" prefWidth="600.0" spacing="12.0" styleClass="footer" stylesheets="@../root_styles.css" BorderPane.alignment="CENTER">
          <padding>
@@ -32,18 +32,18 @@
                <Cursor fx:constant="HAND" />
             </cursor>
          </MenuButton>
-         <Button fx:id="mainexit" accessibleHelp="Press again to exit" accessibleText="Press again to exit" cancelButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="76.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ውጣ">
+         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
+         <Button fx:id="mainexit" accessibleHelp="Press again to exit" accessibleText="Press again to exit" cancelButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="menuettes" stylesheets="@../root_styles.css" text="ውጣ">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
             <font>
                <Font name="System Bold" size="12.0" />
             </font></Button>
-         <Button fx:id="externalmute" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menuettes" stylesheets="@../root_styles.css" visible="false">
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor></Button>
-         <Region prefHeight="48.0" prefWidth="318.0" HBox.hgrow="NEVER" />
+         <Region prefHeight="48.0" prefWidth="318.0" />
          <Button fx:id="nightMode" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="emptyBackedButtons" stylesheets="@../root_styles.css">
             <cursor>
                <Cursor fx:constant="HAND" />

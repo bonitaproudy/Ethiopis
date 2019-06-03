@@ -321,7 +321,7 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Thread musicThread = new Thread(() ->{
             try {
-                String uriString = new File("C:\\Users\\rav3n\\Documents\\GitHub\\Ethiopis\\src\\resources\\02-title-theme.mp3").toURI().toURL().toString();
+                String uriString = new File("src\\resources\\02-title-theme.mp3").toURI().toURL().toString();
                 player= new MediaPlayer(new Media(uriString));
                 if (!isPlaying){
                     player.play();
